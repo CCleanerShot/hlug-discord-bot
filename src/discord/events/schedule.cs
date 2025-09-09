@@ -7,7 +7,7 @@ public partial class DiscordEvents
     {
         // TODO: rewrite
         TimeSpan sevenDays = new TimeSpan(24) * 7;
-        DateTime nowTime = DateTime.Now;
+        DateTime nowTime = new DateTime();
         DateTime meetingTime = new DateTime(2025, 9, 2, 17, 0, 0, DateTimeKind.Utc);
         TimeSpan result = meetingTime - nowTime;
 
@@ -17,6 +17,6 @@ public partial class DiscordEvents
     public async void SendMessages(object? state)
     {
         ITextChannel channel = (ITextChannel)await DiscordBot._Client.GetChannelAsync(UInt64.Parse(Environment.GetEnvironmentVariable("DISCORD_TEST_CHANNEL")!));
-        await channel.SendMessageAsync("@meetup HLUG starts in 1 hour! See you there!");
+        await channel.SendMessageAsync($"<@{Environment.GetEnvironmentVariable("DISCORD_TEST_ROLE_ID")}> HLUG starts in 1 hour! See you there!");
     }
 }
