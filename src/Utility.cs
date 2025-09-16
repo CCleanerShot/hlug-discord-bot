@@ -15,6 +15,7 @@ public class Utility
         writer.Write(Program.Utility.LogLine);
     }
 
+
     /// <summary>
     /// Returns either the relative or absolute path, depending on the environment.
     /// Useful for when some functions require absolute paths on Windows, and relative on Linux. 
