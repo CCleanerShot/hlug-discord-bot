@@ -11,8 +11,7 @@ public partial class DiscordEvents
         DayOfWeek desiredDay = DayOfWeek.Tuesday; // atm is tuesday
         double desiredHour = 23 - _desiredHourBeforeStarting; // atm is 23, for 23 utc
         double day = 1000 * 60 * 60 * 24; // milliseconds * seconds * minutes * hours
-
-        long nowSeconds = DateTime.UtcNow.Ticks / 10000;// https://learn.microsoft.com/en-us/dotnet/api/system.datetime.ticks?view=net-9.0#remarks
+        long nowSeconds = DateTime.UtcNow.Ticks / 10000; // https://learn.microsoft.com/en-us/dotnet/api/system.datetime.ticks?view=net-9.0#remarks
         DateTime meetingTime = new DateTime().AddDays(Math.Floor(nowSeconds / day));
 
         if (meetingTime.DayOfWeek != desiredDay)
@@ -22,7 +21,6 @@ public partial class DiscordEvents
                 meetingTime = meetingTime.AddDays(desiredDay - meetingTime.DayOfWeek);
 
         meetingTime = meetingTime.AddHours(desiredHour);
-
         TimeSpan result = meetingTime - DateTime.UtcNow;
         _HLUGTimer = new Timer(SendMessages, null, (int)result.TotalMilliseconds, (int)sevenDays.TotalMilliseconds);
     }
